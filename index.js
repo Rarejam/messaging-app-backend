@@ -17,6 +17,13 @@ const friendsRoute = require("./routes/friendsRoute");
 const profileRoute = require("./routes/profileRoute");
 const privateRoute = require("./routes/privateRoute");
 
+app.use("/api/group", verifyToken, groupRoute);
+app.use("/api/signup", signupRoute);
+app.use("/api/login", loginRoute);
+app.use("/api/friends", verifyToken, friendsRoute);
+app.use("/api/profile", verifyToken, profileRoute);
+app.use("/api/private-message", verifyToken, privateRoute);
+
 app.use("/", (req, res) => {
   res.send("api root");
 });
@@ -24,13 +31,6 @@ app.use("/", (req, res) => {
 app.use("/api", (req, res) => {
   res.send("api root");
 });
-
-app.use("/api/group", verifyToken, groupRoute);
-app.use("/api/signup", signupRoute);
-app.use("/api/login", loginRoute);
-app.use("/api/friends", verifyToken, friendsRoute);
-app.use("/api/profile", verifyToken, profileRoute);
-app.use("/api/private-message", verifyToken, privateRoute);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
