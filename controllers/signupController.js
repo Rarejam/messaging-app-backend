@@ -7,6 +7,17 @@ const signupController = async (req, res) => {
   if (!email || !password || !confirm_password || !username) {
     return res.status(401).json({ message: "input required feilds" });
   }
+
+  const userExists = await prisma.user.findFirst({
+    where: {
+      OR: [{ email: email }, { username: username }],
+    },
+  });
+
+  if (userExists) {
+    res.status(401).json({ message: "user already exists" });
+  }
+
   if (password !== confirm_password) {
     return res.status(401).json({ message: "Passwords do not match" });
   }

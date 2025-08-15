@@ -7,6 +7,8 @@ require("dotenv").config();
 const loginController = async (req, res) => {
   const { login_email, login_password } = req.body;
 
+  const { bio } = req.body;
+
   if (!login_email || !login_password) {
     return res.status(400).json({ message: "Email and password are required" });
   }
@@ -24,6 +26,22 @@ const loginController = async (req, res) => {
 
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    if (bio && bio.trim() !== "") {
+      console.log(bio);
+      await prisma.profile.upsert({
+        where: {
+          userId: parseInt(user.id),
+        },
+        update: {
+          profileBio: bio,
+        },
+        create: {
+          userId: parseInt(user.id),
+          profileBio: bio,
+        },
+      });
     }
 
     const token = jwt.sign(

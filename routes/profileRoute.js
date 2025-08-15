@@ -6,6 +6,8 @@ const profileRoute = express.Router();
 profileRoute.get("/:id", async (req, res) => {
   const profileid = req.params.id;
 
+  console.log("GET /api/profile hit with id:", req.params.id);
+
   try {
     const user = await prisma.user.findUnique({
       where: {
@@ -38,7 +40,7 @@ profileRoute.post("/:id", async (req, res) => {
       where: { userId: parseInt(userId) },
       update: {
         profileImage: inputUrl,
-        profileBio: bio,
+        // profileBio: bio,
       },
       create: {
         profileImage: inputUrl,
