@@ -10,7 +10,7 @@ require("dotenv").config();
 const verifyToken = require("./jwtConfig");
 
 const groupRoute = require("./routes/groupRoute");
-const loginRoute = require("./routes/LoginRoute");
+const loginRoute = require("./routes/loginRoute");
 const signupRoute = require("./routes/signupRoute");
 const friendsRoute = require("./routes/friendsRoute");
 const profileRoute = require("./routes/profileRoute");
