@@ -13,8 +13,6 @@ app.use(
   })
 );
 
-app.options("*", cors());
-
 require("dotenv").config();
 const verifyToken = require("./jwtConfig");
 
