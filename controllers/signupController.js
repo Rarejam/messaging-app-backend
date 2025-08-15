@@ -22,7 +22,10 @@ const signupController = async (req, res) => {
         password: hashedPassword,
       },
     });
-    return res.status(200).json(user, { message: "signup successful" });
+    return res.status(200).json({
+      message: "Signup successful",
+      user,
+    });
   } catch (err) {
     console.log(err);
   }
