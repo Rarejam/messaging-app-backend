@@ -32,7 +32,7 @@ app.use("/api/friends", verifyToken, friendsRoute);
 app.use("/api/profile", verifyToken, profileRoute);
 app.use("/api/private-message", verifyToken, privateRoute);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`port running on ${PORT}`);
 });
