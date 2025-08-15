@@ -24,7 +24,7 @@ groupRoute.get("/", async (req, res) => {
       .json({ message: "No group messages", err: err.message });
   }
 });
-groupRoute.post("/:id", groupController);
+groupRoute.post("/", groupController);
 // groupRoute.post("/:id", (req, res) => {
 //   const { id } = req.params;
 // });
