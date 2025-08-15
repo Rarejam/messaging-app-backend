@@ -24,6 +24,6 @@ app.use("/api/profile", verifyToken, profileRoute);
 app.use("/api/private-message", verifyToken, privateRoute);
 
 const PORT = process.env.PORT;
-app.listen(PORT, (req, res) => {
+app.listen(PORT, () => {
   console.log(`port running on ${PORT}`);
 });
