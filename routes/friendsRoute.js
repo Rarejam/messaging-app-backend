@@ -31,7 +31,6 @@ friendsRoute.post("/", async (req, res) => {
         profile: true,
       },
     });
-    console.log(user);
     return res.status(200).json(user);
   } catch (err) {
     return res.status(500).json({ message: "No User Found" });

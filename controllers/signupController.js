@@ -3,9 +3,15 @@ const prisma = new PrismaClient();
 const bcrypt = require("bcryptjs");
 const signupController = async (req, res) => {
   const { username, email, password, confirm_password } = req.body;
-  console.log(req.body);
+
+  if (!email || !password || !confirm_password || !username) {
+    return res.status(401).json({ message: "input required feilds" });
+  }
   if (password !== confirm_password) {
     return res.status(401).json({ message: "Passwords do not match" });
+  }
+  if (password.length < 8) {
+    return res.status(401).json({ message: "Password too short" });
   }
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -16,7 +22,6 @@ const signupController = async (req, res) => {
         password: hashedPassword,
       },
     });
-    console.log(user);
     return res.status(200).json(user);
   } catch (err) {
     console.log(err);
