@@ -3,6 +3,17 @@ const friendsRoute = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
+friendsRoute.get("/", async (req, res) => {
+  try {
+    const data = await prisma.user.findMany({
+      include: { profile: true },
+    });
+    res.status(200).json(data);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 friendsRoute.get("/:friendId", async (req, res) => {
   const { friendId } = req.params;
   try {
